@@ -6,7 +6,7 @@ import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App />  {/*Esse "App" é o mesmo app do arquivo .tsx*/}
   </React.StrictMode>,
   document.getElementById('root')
 );
