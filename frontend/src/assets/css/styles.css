@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');/*Aqui estamos importando uma fonte do
+google podemos pesquisar "fontes google" escolher uma fonte e suas variáveis e então importar*/
+:root { /*O :root é para definiar as variáveis (abaixo) de forma global, uma delas é a "color-primary"*/
+    --color-primary: #FF8400;
+}
+
+html, body {
+    height: 100%;
+    font-family: "Ubuntu", sans-serif;
+}/*Aqui a fonte família é a Ubuntu que importamos e, se não for encontrada, sans-serif*/
+
+#root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+/*Tudo que tem um ponto antes tem relação com o bootstrap*/
+.content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+    text-align: center;
+}
+
+/*A cor teve que ser especificada porque o bootstrap tem cores padrões para esses nomes*/ 
+.bg-primary {
+    background-color: var(--color-primary) !important;
+}
+
+.text-primary {
+    color: var(--color-primary) !important;
+}
