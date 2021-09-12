@@ -1,0 +1,1 @@
+export const BASE_URL = 'http://localhost:8080'; //Uma URL base para se usar no projeto inteiro
