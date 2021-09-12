@@ -1,1 +1,2 @@
-export const BASE_URL = 'http://localhost:8080'; //Uma URL base para se usar no projeto inteiro
+export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'http://localhost:8080'; //Uma URL (8080) base para se usar no projeto inteiro
+//As duas interrogações servem para rodar tanto localmente (quando o REACT_APP_BACKEND_URL não estiver definido) quanto na web  
