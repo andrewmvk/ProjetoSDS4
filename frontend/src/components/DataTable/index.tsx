@@ -1,4 +1,27 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { SalePage } from "types/sale";
+import { isThisTypeNode } from "typescript";
+import { formatLocalDate } from "utils/format";
+import { BASE_URL } from "utils/requests";
+
 function DataTable() {
+
+    const [page, setPage] = useState<SalePage>({
+        first: true,
+        last: true,
+        number: 0,
+        totalElements: 0,
+        totalPages: 0
+    })
+
+    useEffect(() => {
+        axios.get(`${BASE_URL}/sales?page=0&size=20&sort=date,desc`)
+            .then(response => { // O .then pega a resposta e realiza algumas atribuições apenas se o axios.get der certo
+                setPage(response.data); // Pega o corpo da resposta e joga no page
+            })
+    }, [])
+
     return (
         <div className="table-responsive">
             <table className="table table-striped table-sm">
@@ -12,34 +35,18 @@ function DataTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>22/04/2021</td>
-                        <td>Barry Allen</td>
-                        <td>34</td>
-                        <td>25</td>
-                        <td>15017.00</td>
-                    </tr>
-                    <tr>
-                        <td>22/04/2021</td>
-                        <td>Brayan</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0.00</td>
-                    </tr>
-                    <tr>
-                        <td>22/04/2021</td>
-                        <td>João</td>
-                        <td>23</td>
-                        <td>21</td>
-                        <td>13070.00</td>
-                    </tr>
-                    <tr>
-                        <td>22/04/2021</td>
-                        <td>Maria</td>
-                        <td>50</td>
-                        <td>35</td>
-                        <td>20450.00</td>
-                    </tr>
+                    {page.content?.map(item => (
+                        <tr key={item.id}>
+                            <td>{formatLocalDate(item.date, "dd/MM/yyyy")}</td>
+                            <td>{item.seller.name}</td>
+                            <td>{item.visited}</td>
+                            <td>{item.deals}</td>
+                            <td>{item.amount.toFixed(2)}</td> 
+                            {/*A interrogação é para verificar se realmente existe um conteúdo dentro de "content", se existir, vai ser realizado
+                            um mapemanto do objeto "item". toFixed(2) é para imprimir com 2 casas decimais e o formatLocalDate é uma função que criamos
+                            para imprimir uma data (primeiro parâmetro) e um formato (segundo parâmetro)*/}
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
